@@ -4,7 +4,7 @@
 
 ## Содержимое
 - springframework
-- pengrad-java-telegram-bot-api
+- com.github.pengrad:java-telegram-bot-api
 - postgresql
 - spring jpa
 - lombok
