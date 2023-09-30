@@ -1,0 +1,11 @@
+version: '2'
+services:
+  secret_santa:
+    container_name: secret_santa
+    image: secret_santa
+    build:
+        context: .
+        dockerfile: Dockerfile
+    expose:
+      - "8080"
+    restart: unless-stopped
