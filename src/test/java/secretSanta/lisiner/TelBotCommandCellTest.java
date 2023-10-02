@@ -185,7 +185,7 @@ public class TelBotCommandCellTest {
         String aliasDream = generatorEntity.generateDream();
         //для того чтобы зайти в группу нужен токен
         //сгенерируем его и добавим в группу
-        String token = encoderService.generateToken();
+        String token = encoderService.generateTokenWithCheckExits();
         String hash = encoderService.getHash(token);
         cell.setTokenDB(encoderService.getTokenDB(token));
         cell.setTokenHash(hash);

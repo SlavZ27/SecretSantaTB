@@ -2,6 +2,7 @@ package secretSanta.security;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import secretSanta.service.CellService;
 
 import java.util.Random;
 
@@ -10,11 +11,21 @@ public class EncoderService {
     private int countToken = 20;
     private int countTokenDB = 10;
     private final PasswordEncoder passwordEncoder;
+    private final CellService cellService;
 
     private static final String PAS_PREFIX = "{bcrypt}";
 
-    public EncoderService(PasswordEncoder passwordEncoder) {
+    public EncoderService(PasswordEncoder passwordEncoder, CellService cellService) {
         this.passwordEncoder = passwordEncoder;
+        this.cellService = cellService;
+    }
+
+    public String generateTokenWithCheckExits() {
+        String generateString = generateToken();
+        while (cellService.existByTokenDB(getTokenDB(generateString))) {
+            generateString = generateToken();
+        }
+        return generateString;
     }
 
     public String generateToken() {
@@ -24,6 +35,7 @@ public class EncoderService {
     public String getHash(String token) {
         return PAS_PREFIX + passwordEncoder.encode(token);
     }
+
     public String getTokenDB(String token) {
         if (token.length() < countTokenDB) {
             return null;

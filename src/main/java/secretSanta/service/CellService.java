@@ -51,6 +51,10 @@ public class CellService {
         return cellRepository.findByTokenDB(tokenDB).orElse(null);
     }
 
+    public boolean existByTokenDB(String tokenDB) {
+        return cellRepository.countByTokenDB(tokenDB) > 0;
+    }
+
     public Cell findByUserAlias(Long userAliasId) {
         return cellRepository.findByUserAlias(userAliasId).orElse(null);
     }

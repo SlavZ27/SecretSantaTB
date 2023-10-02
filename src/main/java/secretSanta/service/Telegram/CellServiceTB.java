@@ -124,7 +124,7 @@ public class CellServiceTB {
         }
         //aliasDream
         if (!message.isBlank()) {
-            String token = encoderService.generateToken();
+            String token = encoderService.generateTokenWithCheckExits();
             String hash = encoderService.getHash(token);
             UserAlias userAlias = new UserAlias();
             userAlias.setDisplayName(aliasName);

@@ -30,6 +30,12 @@ public interface CellRepository extends JpaRepository<Cell, Long> {
 
     @Query(value = """ 
             select count(c) from cell c
+            where c.tokenDB=:tokenDB
+            """)
+    int countByTokenDB(@Param(value = "tokenDB") String tokenDB);
+
+    @Query(value = """ 
+            select count(c) from cell c
             left join user_alias ua on ua in elements(c.userAliases)
             where c.id=:cellId and ua.user.id=:userId and ua.enable
             """)

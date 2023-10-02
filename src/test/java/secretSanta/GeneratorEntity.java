@@ -296,7 +296,7 @@ public class GeneratorEntity {
     }
 
     public Cell generateSaveCell(UserAlias userAlias) {
-        String token = encoderService.generateToken();
+        String token = encoderService.generateTokenWithCheckExits();
         String hash = encoderService.getHash(token);
         Cell cell = new Cell();
         cell.setName(generateDream());
@@ -348,7 +348,7 @@ public class GeneratorEntity {
         }
         //generate cell with userAlias=owner
         for (int i = 0; i < cellInt; i++) {
-            String token = encoderService.generateToken();
+            String token = encoderService.generateTokenWithCheckExits();
             String hash = encoderService.getHash(token);
             UserAlias userAlias = new UserAlias();
             userAlias.setDisplayName(generateFirstName());
