@@ -179,9 +179,10 @@ public class CellServiceTB {
         String aliasName = params.get(paramAliasName);
         //token
         if (idCell == null || idAlias == null) {
-            String token = message;
-            Cell cell = cellService.findByTokenDB(encoderService.getTokenDB(token));
-            if (cell == null || !encoderService.matches(token, cell.getTokenHash())) {
+//          token = message
+            String tokenDB = encoderService.getTokenDB(message);
+            Cell cell = tokenDB != null ? cellService.findByTokenDB(tokenDB) : null;
+            if (cell == null || !encoderService.matches(message, cell.getTokenHash())) {
                 senderMessageServiceTB.sendMessage(chat.getId(), MESSAGE_TOKEN_FAIL);
                 return;
             }

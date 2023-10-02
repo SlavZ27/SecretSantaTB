@@ -25,6 +25,9 @@ public class EncoderService {
         return PAS_PREFIX + passwordEncoder.encode(token);
     }
     public String getTokenDB(String token) {
+        if (token.length() < countTokenDB) {
+            return null;
+        }
         return token.substring(0, countTokenDB);
     }
 
